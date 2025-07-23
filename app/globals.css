@@ -16,7 +16,7 @@
 @layer base {
   * {
     
-    @apply border-gray-01;
+    @apply border-gray-01 antialiased;
 }
 
 body {
