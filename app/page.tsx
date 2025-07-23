@@ -16,6 +16,12 @@ const Home =  async () => {
 
   const barbershops = await db.barbershop.findMany({});
 
+  const popularBarbershops = await db.barbershop.findMany({
+    orderBy: {
+      name: "desc",
+    }
+  })
+
   return (
     <div>
       {/* Header */}
@@ -32,6 +38,36 @@ const Home =  async () => {
             <SearchIcon />
           </Button>
         </div>
+
+        {/* Busca Rápida */}
+
+        <div className="flex gap-3 mt-6 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+          <Button className="bg-secondary-black">
+            <Image alt="serviços cabelo" src="/cabelo.png" width={16} height={16}/>
+            Cabelo
+          </Button>
+          <Button className="bg-secondary-black">
+            <Image alt="serviços barba" src="/barba.png" width={16} height={16}/>
+            Barba
+          </Button>
+          <Button className="bg-secondary-black">
+            <Image alt="serviços de acabamento" src="/acabamento.png" width={16} height={16}/>
+            Acabamento
+          </Button>
+           <Button className="bg-secondary-black">
+            <Image alt="serviços de sobrancelha" src="/sobrancelha.png" width={16} height={16}/>
+            Sobrancelha
+          </Button>
+           <Button className="bg-secondary-black">
+            <Image alt="serviços de massagem" src="/massagem.png" width={16} height={16}/>
+            Massagem
+          </Button>
+           <Button className="bg-secondary-black">
+            <Image alt="serviços de hidratação" src="/hidratacao.png" width={16} height={16}/>
+            Hidratação
+          </Button>
+        </div>
+        
         {/* Imagem */}
         <div className="relative mt-6 h-[150px] w-full">
           <Image
@@ -80,7 +116,34 @@ const Home =  async () => {
           <BarbershopItem key={barbershop.id} barbershop={barbershop}/>
         ))}
         </div>
+
+        <h2 className="mb-3 mt-6 font-bold uppercase text-gray-03 ">
+          Populares
+        </h2>
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden ">
+          {popularBarbershops.map((barbershop) => (
+          <BarbershopItem key={barbershop.id} barbershop={barbershop}/>
+        ))}
+        </div>
       </div>
+
+      {/* Footer */}
+
+     <footer>
+       <Card className="rounded-none">
+        <CardContent className="p-5 text-center">
+          <p className="text-sm text-gray-03">
+            Desenvolvido com 🤍 por {" "}
+            <span className="hover:cursor-pointer">
+              <a 
+                href="https://www.linkedin.com/in/vanessa-a-santana/" 
+                className="hover:underline underline-offset-2 font-bold text-primary-purple" target="_blank">
+              Vanessa Santana</a>
+            </span>
+          </p>
+        </CardContent>
+      </Card>
+     </footer>
     </div>
   )
 }
