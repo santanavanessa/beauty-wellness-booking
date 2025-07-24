@@ -8,6 +8,7 @@ import { db } from "./lib/prisma"
 import { quickSearchOptions } from "./constants/search"
 import BookingItem from "./components/booking-item"
 import BarbershopItem from "./components/barbershop-item"
+import { notFound } from "next/navigation"
 
 
 const Home =  async () => {
@@ -21,6 +22,7 @@ const Home =  async () => {
       name: "desc",
     }
   })
+
 
   return (
     <div>
