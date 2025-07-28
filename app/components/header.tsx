@@ -50,12 +50,13 @@ const Header = () => {
                   Início
                 </Link>
                 </Button>
-              <Button className="justify-start gap-2 hover:bg-secondary-black" variant="ghost"></Button>
-
+              
               </SheetClose>
+              <Button className="justify-start gap-2 hover:bg-secondary-black" variant="ghost">
                 <CalendarIcon size={18} />
                 Agendamentos
               </Button>
+                
             </div>
 
             <div className="flex flex-col gap-2 border-b border-solid py-5">
