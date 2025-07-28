@@ -3,12 +3,10 @@ import Header from "./components/header"
 import { Button } from "./components/ui/button"
 import { Input } from "./components/ui/input"
 import Image from "next/image"
-import { Card, CardContent } from "./components/ui/card"
 import { db } from "./lib/prisma"
 import { quickSearchOptions } from "./constants/search"
 import BookingItem from "./components/booking-item"
 import BarbershopItem from "./components/barbershop-item"
-import { notFound } from "next/navigation"
 
 
 const Home =  async () => {
