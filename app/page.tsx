@@ -7,6 +7,7 @@ import { quickSearchOptions } from "./constants/search"
 import BookingItem from "./components/booking-item"
 import BarbershopItem from "./components/barbershop-item"
 import Search from "./components/search"
+import Link from "next/link"
 
 
 const Home =  async () => {
@@ -41,9 +42,11 @@ const Home =  async () => {
         <div className="flex gap-3 mt-6 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {
             quickSearchOptions.map(option =>( 
-            <Button className="bg-secondary-black" key={option.title}>
-              <Image alt={option.title} src={option.imageUrl} width={16} height={16}/>
-              {option.title}
+            <Button className="bg-secondary-black" key={option.title} asChild>
+              <Link href={`/barbershops?service=${option.title}`}>
+                <Image alt={option.title} src={option.imageUrl} width={16} height={16}/>
+                {option.title}
+              </Link>
             </Button>
             ))}
           

@@ -19,8 +19,8 @@ import { Avatar, AvatarImage } from "./ui/avatar"
 
 const Sidebar = () => {
   const { data } = useSession()
-  const handleLoginWithGoogleClick = () => signIn("google");
-  const handleLogoutClick = () => signOut();
+  const handleLoginWithGoogleClick = () => signIn("google")
+  const handleLogoutClick = () => signOut()
 
   return (
     <SheetContent className="overflow-y-auto bg-background-black">
@@ -29,12 +29,14 @@ const Sidebar = () => {
       </SheetHeader>
 
       <div className="flex items-center gap-3 border-b border-solid px-5 pb-5">
-        
-
         {data?.user ? (
           <div className="flex items-center gap-2">
             <Avatar>
-              <AvatarImage src={data?.user?.image ?? ""} width={18} height={18}/>
+              <AvatarImage
+                src={data?.user?.image ?? ""}
+                width={18}
+                height={18}
+              />
             </Avatar>
 
             <div>
@@ -53,7 +55,7 @@ const Sidebar = () => {
                 </Button>
               </DialogTrigger>
 
-              <DialogContent className="rounded-2xl bg-secondary-black sm:max-w-md lg:min-w-lg ">
+              <DialogContent className="rounded-2xl bg-secondary-black sm:max-w-md lg:min-w-lg">
                 <DialogHeader>
                   <DialogTitle>Faça seu login na plataforma</DialogTitle>
                   <DialogDescription>
@@ -103,28 +105,31 @@ const Sidebar = () => {
 
       <div className="flex flex-col gap-2 border-b border-solid py-5">
         {quickSearchOptions.map((option) => (
-          <Button
-            key={option.title}
-            className="justify-start gap-2 hover:bg-secondary-black"
-            variant="ghost"
-          >
-            <Image
-              alt={option.title}
-              src={option.imageUrl}
-              height={18}
-              width={18}
-            />
-            {option.title}
-          </Button>
+          <SheetClose key={option.title} asChild>
+            <Button
+              className="justify-start gap-2 hover:bg-secondary-black"
+              variant="ghost"
+            >
+              <Link href={`/barbershops?service=${option.title}`}>
+                <Image
+                  alt={option.title}
+                  src={option.imageUrl}
+                  height={18}
+                  width={18}
+                />
+                {option.title}
+              </Link>
+            </Button>
+          </SheetClose>
         ))}
       </div>
 
       <div className="flex flex-col gap-2 py-5">
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           className="justify-start gap-2"
           onClick={handleLogoutClick}
-          >
+        >
           <LogOutIcon size={18} />
           Sair da conta
         </Button>

@@ -6,12 +6,15 @@ import {
   Sheet, SheetTrigger
 } from "./ui/sheet"
 import Sidebar from "./sidebar"
+import Link from "next/link"
 
 const Header = () => {
   return (
     <Card className="rounded-none">
       <CardContent className="flex flex-row items-center justify-between p-5">
-        <Image alt="Trimmr" src="/logo.svg" height={18} width={120} />
+        <Link href="/">
+          <Image alt="Trimmr" src="/logo.svg" height={18} width={120} />
+        </Link>
 
         <Sheet>
           <SheetTrigger asChild>
