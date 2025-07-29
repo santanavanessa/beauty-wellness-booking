@@ -22,4 +22,8 @@
 body {
   @apply bg-background-black text-white;
 }
+
+button {
+  @apply cursor-pointer;
+}
 }
