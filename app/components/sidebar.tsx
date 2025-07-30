@@ -7,7 +7,7 @@ import Link from "next/link"
 import { quickSearchOptions } from "../constants/search"
 import Image from "next/image"
 import {
-  Dialog,
+  Dialog, 
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -23,7 +23,7 @@ const Sidebar = () => {
   const handleLogoutClick = () => signOut()
 
   return (
-    <SheetContent className="overflow-y-auto bg-background-black">
+    <SheetContent className="overflow-y-auto bg-secondary-black">
       <SheetHeader>
         <SheetTitle className="text-left">Menu</SheetTitle>
       </SheetHeader>
