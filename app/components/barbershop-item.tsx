@@ -1,42 +1,52 @@
-import Image from "next/image";
-import { Barbershop } from "../generated/prisma";
-import { Card, CardContent } from "./ui/card";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { StarIcon } from "lucide-react";
-import Link from "next/link";
+import Image from "next/image"
+import { Barbershop } from "../generated/prisma"
+
+import { StarIcon } from "lucide-react"
+import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 interface BarbershopItemProps {
-    barbershop: Barbershop
+  barbershop: Barbershop
 }
 
-const BarbershopItem = ({barbershop}: BarbershopItemProps) => {
-    return ( 
-        <Card className="min-w-[167px] p-0 bg-secondary-black mb-6">
-            <CardContent className="p-0">
-                {/* Imagem */}
-                <div className="relative h-[159px] w-full">
-                    <Image alt={barbershop.name} fill className="object-cover rounded-t-2xl" src={barbershop.imageUrl}/>
+const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
+  return (
+    <Card className="mb-6 min-w-[167px] bg-secondary-black p-0">
+      <CardContent className="p-0">
+        {/* Imagem */}
+        <div className="relative h-[159px] w-full">
+          <Image
+            alt={barbershop.name}
+            fill
+            className="rounded-t-2xl object-cover"
+            src={barbershop.imageUrl}
+          />
 
-                    <Badge className="absolute left-2 top-2 bg-dark-purple/70  z-50" variant="secondary">
-                        <StarIcon size={12} className="fill-primary-purple text-primary-purple"/>
-                        <p className="font-semibold text-xs">5,0</p>
-                    </Badge>
-                </div>
+          <Badge
+            className="absolute top-2 left-2 z-50 bg-dark-purple/70"
+            variant="secondary"
+          >
+            <StarIcon
+              size={12}
+              className="fill-primary-purple text-primary-purple"
+            />
+            <p className="text-xs font-semibold">5,0</p>
+          </Badge>
+        </div>
 
-                {/* Texto */}
-                <div className="px-2 py-3">
-                    <h3 className="font-semibold truncate">{barbershop.name}</h3>
-                    <p className="text-sm text-gray-03 truncate">{barbershop.address}</p>
-                    <Button className="mt-3 w-full bg-gray-01" asChild>
-                        <Link href={`/barbershops/${barbershop.id}`}>
-                            Reservar
-                        </Link>
-                    </Button>
-                </div>
-            </CardContent>
-        </Card>
-     );
+        {/* Texto */}
+        <div className="px-2 py-3">
+          <h3 className="truncate font-semibold">{barbershop.name}</h3>
+          <p className="truncate text-sm text-gray-03">{barbershop.address}</p>
+          <Button className="mt-3 w-full bg-gray-01" asChild>
+            <Link href={`/barbershops/${barbershop.id}`}>Reservar</Link>
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  )
 }
- 
-export default BarbershopItem;
+
+export default BarbershopItem

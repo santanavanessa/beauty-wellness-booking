@@ -1,21 +1,26 @@
 "use client"
 
 import { CalendarIcon, HomeIcon, LogInIcon, LogOutIcon } from "lucide-react"
-import { Button } from "./ui/button"
-import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet"
+import { Button } from "@/components/ui/button"
+import {
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import Link from "next/link"
 import { quickSearchOptions } from "../constants/search"
 import Image from "next/image"
 import {
-  Dialog, 
+  Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog"
+} from "@/components/ui/dialog"
 import { signIn, signOut, useSession } from "next-auth/react"
-import { Avatar, AvatarImage } from "./ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 
 const Sidebar = () => {
   const { data } = useSession()

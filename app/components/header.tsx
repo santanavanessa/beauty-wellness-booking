@@ -1,12 +1,11 @@
 import Image from "next/image"
-import { Card, CardContent } from "./ui/card"
-import { Button } from "./ui/button"
 import { MenuIcon } from "lucide-react"
-import {
-  Sheet, SheetTrigger
-} from "./ui/sheet"
+
 import Sidebar from "./sidebar"
 import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/card"
+import { Sheet, SheetTrigger } from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
 
 const Header = () => {
   return (
@@ -21,7 +20,7 @@ const Header = () => {
             <Button
               size="icon"
               variant="outline"
-              className="absolute right-4 top-4 cursor-pointer hover:bg-gray-01 transition-colors"
+              className="absolute top-4 right-4 cursor-pointer transition-colors hover:bg-gray-01"
             >
               <MenuIcon />
             </Button>

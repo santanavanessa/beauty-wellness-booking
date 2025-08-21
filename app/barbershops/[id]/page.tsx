@@ -1,14 +1,11 @@
 import Phoneitem from "@/app/components/phone-item"
 import ServiceItem from "@/app/components/service-item"
 import Sidebar from "@/app/components/sidebar"
-import { Button } from "@/app/components/ui/button"
-import { Sheet, SheetTrigger } from "@/app/components/ui/sheet"
+
 import { db } from "@/app/lib/prisma"
-import {
-  ChevronLeftIcon,
-  MapPinIcon,
-  MenuIcon, StarIcon
-} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetTrigger } from "@/components/ui/sheet"
+import { ChevronLeftIcon, MapPinIcon, MenuIcon, StarIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -58,7 +55,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
         <Button
           size="icon"
           variant="outline"
-          className="absolute top-4 left-4 bg-secondary-black cursor-pointer hover:bg-gray-01 transition-colors "
+          className="absolute top-4 left-4 cursor-pointer bg-secondary-black transition-colors hover:bg-gray-01"
         >
           <Link href="/">
             <ChevronLeftIcon />
@@ -70,7 +67,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
             <Button
               size="icon"
               variant="outline"
-              className="absolute top-4 right-4 bg-secondary-black cursor-pointer hover:bg-gray-01 transition-colors "
+              className="absolute top-4 right-4 cursor-pointer bg-secondary-black transition-colors hover:bg-gray-01"
             >
               <MenuIcon />
             </Button>
@@ -111,7 +108,11 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
         <h2 className="text-xs font-bold text-gray-03 uppercase">Serviços</h2>
         <div className="space-y-3">
           {barbershopData.services.map((service) => (
-            <ServiceItem key={service.id} service={service} />
+            <ServiceItem
+              key={service.id}
+              barbershop={JSON.parse(JSON.stringify(barbershop))}
+              service={JSON.parse(JSON.stringify(service))}
+            />
           ))}
         </div>
       </div>
