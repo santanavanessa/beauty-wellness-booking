@@ -1,7 +1,5 @@
 "use client"
 
-import { Barbershop, BarbershopService, Booking } from "@prisma/client"
-
 import { ptBR } from "date-fns/locale"
 import { useEffect, useMemo, useState } from "react"
 import { isPast, isToday, set } from "date-fns"
@@ -23,6 +21,8 @@ import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { createBooking } from "../actions/create-booking"
 import { getBookings } from "../actions/get-booking"
 import { toast } from "sonner"
+import SignInDialog from "./sign-in-dialog"
+import { Barbershop, BarbershopService, Booking } from "../generated/prisma"
 
 interface ServiceItemProps {
   service: BarbershopService
@@ -180,7 +180,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
             <p className="text-sm text-gray-400">{service.description}</p>
             {/* PREÇO E BOTÃO */}
             <div className="flex items-center justify-between">
-              <p className="text-primary text-sm font-bold">
+              <p className="text-sm font-bold text-primary-purple">
                 {Intl.NumberFormat("pt-BR", {
                   style: "currency",
                   currency: "BRL",
@@ -192,6 +192,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                 onOpenChange={handleBookingSheetOpenChange}
               >
                 <Button
+                  className="bg-gray-01"
                   variant="secondary"
                   size="sm"
                   onClick={handleBookingClick}
