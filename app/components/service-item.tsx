@@ -5,12 +5,8 @@ import { Barbershop, BarbershopService, Booking } from "@prisma/client"
 import { ptBR } from "date-fns/locale"
 import { useEffect, useMemo, useState } from "react"
 import { isPast, isToday, set } from "date-fns"
-import { createBooking } from "../_actions/create-booking"
 import { useSession } from "next-auth/react"
-import { toast } from "sonner"
-import { getBookings } from "../_actions/get-bookings"
-import SignInDialog from "./sign-in-dialog"
-import BookingSummary from "./booking-summary"
+
 import { useRouter } from "next/navigation"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
@@ -24,6 +20,9 @@ import {
 import { Button } from "@/components/ui/button"
 import { Calendar } from "lucide-react"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { createBooking } from "../actions/create-booking"
+import { getBookings } from "../actions/get-booking"
+import { toast } from "sonner"
 
 interface ServiceItemProps {
   service: BarbershopService
