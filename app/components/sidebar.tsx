@@ -26,7 +26,7 @@ const Sidebar = () => {
         <SheetTitle className="text-left">Menu</SheetTitle>
       </SheetHeader>
 
-      <div className="flex items-center gap-3 border-b border-solid px-5 pb-5">
+      <div className="flex items-center gap-3 border-b border-solid px-5 py-5">
         {data?.user ? (
           <div className="flex items-center gap-2">
             <Avatar>
@@ -38,7 +38,7 @@ const Sidebar = () => {
             </Avatar>
 
             <div>
-              <p className="font-bold text-gray-400">{data.user.name}</p>
+              <p className="font-bold text-gray-03">{data.user.name}</p>
               <p className="text-xs">{data.user.email}</p>
             </div>
           </div>
@@ -87,7 +87,7 @@ const Sidebar = () => {
 
       <div className="flex flex-col gap-2 border-b border-solid py-5">
         {quickSearchOptions.map((option) => (
-          <SheetClose key={option.title} asChild>
+          <div key={option.title}>
             <Button
               className="justify-start gap-2 hover:bg-secondary-black"
               variant="ghost"
@@ -98,11 +98,12 @@ const Sidebar = () => {
                   src={option.imageUrl}
                   height={18}
                   width={18}
+                  className="float-left mr-2"
                 />
                 {option.title}
               </Link>
             </Button>
-          </SheetClose>
+          </div>
         ))}
       </div>
       {data?.user && (
