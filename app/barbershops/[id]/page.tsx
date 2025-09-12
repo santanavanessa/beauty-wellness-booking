@@ -17,11 +17,10 @@ interface BarbershopPageProps {
 }
 
 const BarbershopPage = async ({ params }: BarbershopPageProps) => {
-  const { id } = await params
-
+  //Chamar o banco de dados
   const barbershop = await db.barbershop.findUnique({
     where: {
-      id,
+      id: params.id,
     },
     include: {
       services: true,
@@ -32,22 +31,14 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
     return notFound()
   }
 
-  const barbershopData = {
-    ...barbershop,
-    services: barbershop.services.map((service) => ({
-      ...service,
-      price: service.price.toNumber(),
-    })),
-  }
-
   return (
     <div>
       {/* Imagem */}
 
       <div className="relative h-[250px] w-full">
         <Image
-          alt={barbershopData.name}
-          src={barbershopData.imageUrl}
+          alt={barbershop.name}
+          src={barbershop?.imageUrl}
           fill
           className="object-cover"
         />
@@ -80,7 +71,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
       {/* Título */}
 
       <div className="border-b border-solid p-5">
-        <h1 className="mb-3 text-xl font-bold">{barbershopData.name}</h1>
+        <h1 className="mb-3 text-xl font-bold">{barbershop.name}</h1>
         <div className="mb-2 flex items-center gap-2">
           <MapPinIcon className="text-primary-purple" size={18} />
           <p className="text-sm">{barbershop?.address}</p>
@@ -99,7 +90,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
 
       <div className="space-y-2 border-b border-solid p-5">
         <h2 className="text-xs font-bold text-gray-03 uppercase">Sobre nós</h2>
-        <p className="text-justify text-sm">{barbershopData.description}</p>
+        <p className="text-justify text-sm">{barbershop.description}</p>
       </div>
 
       {/* Serviços */}
@@ -107,7 +98,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
       <div className="space-y-3 border-b border-solid p-5">
         <h2 className="text-xs font-bold text-gray-03 uppercase">Serviços</h2>
         <div className="space-y-3">
-          {barbershopData.services.map((service) => (
+          {barbershop.services.map((service) => (
             <ServiceItem
               key={service.id}
               barbershop={JSON.parse(JSON.stringify(barbershop))}

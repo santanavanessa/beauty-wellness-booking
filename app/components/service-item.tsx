@@ -2,7 +2,6 @@
 
 import { ptBR } from "date-fns/locale"
 import { useEffect, useMemo, useState } from "react"
-import { isPast, isToday, set } from "date-fns"
 import { useSession } from "next-auth/react"
 
 import { useRouter } from "next/navigation"
@@ -16,13 +15,15 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Calendar } from "lucide-react"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { createBooking } from "../actions/create-booking"
 import { getBookings } from "../actions/get-booking"
 import { toast } from "sonner"
 import SignInDialog from "./sign-in-dialog"
 import { Barbershop, BarbershopService, Booking } from "../generated/prisma"
+import { isPast, isToday, set } from "date-fns"
+import { Calendar } from "@/components/ui/calendar"
+import BookingSummary from "./booking-summary"
 
 interface ServiceItemProps {
   service: BarbershopService
@@ -200,13 +201,14 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                   Reservar
                 </Button>
 
-                <SheetContent className="px-0">
+                <SheetContent className="w-[250px] overflow-y-auto bg-secondary-black px-0 text-white sm:w-[320px] md:w-[400px]">
                   <SheetHeader>
                     <SheetTitle>Fazer Reserva</SheetTitle>
                   </SheetHeader>
 
-                  <div className="border-b border-solid py-5">
+                  <div className="border-b border-solid py-5 lg:py-1">
                     <Calendar
+                      className="flex w-full items-center justify-center"
                       mode="single"
                       locale={ptBR}
                       selected={selectedDay}
@@ -234,12 +236,21 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                         caption: {
                           textTransform: "capitalize",
                         },
+                        months: {
+                          width: "100%",
+                        },
+                        month: {
+                          width: "100%",
+                        },
+                        table: {
+                          width: "100%",
+                        },
                       }}
                     />
                   </div>
 
                   {selectedDay && (
-                    <div className="flex gap-3 overflow-x-auto border-b border-solid p-5 [&::-webkit-scrollbar]:hidden">
+                    <div className="flex gap-2 overflow-x-auto border-b border-solid p-5 [&::-webkit-scrollbar]:hidden">
                       {timeList.length > 0 ? (
                         timeList.map((time) => (
                           <Button
@@ -247,7 +258,6 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                             variant={
                               selectedTime === time ? "default" : "outline"
                             }
-                            className="rounded-full"
                             onClick={() => handleTimeSelect(time)}
                           >
                             {time}
@@ -274,6 +284,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                     <Button
                       onClick={handleCreateBooking}
                       disabled={!selectedDay || !selectedTime}
+                      className="w-full rounded-xl bg-primary-purple text-white"
                     >
                       Confirmar
                     </Button>
@@ -289,7 +300,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
         open={signInDialogIsOpen}
         onOpenChange={(open) => setSignInDialogIsOpen(open)}
       >
-        <DialogContent className="w-[90%]">
+        <DialogContent className="w-[90%] overflow-y-auto bg-secondary-black text-white">
           <SignInDialog />
         </DialogContent>
       </Dialog>

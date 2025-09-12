@@ -8,11 +8,11 @@ import BarbershopItem from "./components/barbershop-item"
 import Search from "./components/search"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { getServerSession } from "next-auth"
+import { authOptions } from "./lib/auth"
 
 const Home = async () => {
-  {
-    /*Chamar a barbearia -> barbershop é o nome da tabela*/
-  }
+  const session = await getServerSession(authOptions)
 
   const barbershops = await db.barbershop.findMany({})
 
@@ -21,6 +21,27 @@ const Home = async () => {
       name: "desc",
     },
   })
+
+  const confirmedbookings = session?.user
+    ? await db.booking.findMany({
+        where: {
+          userId: (session.user as any).id,
+          date: {
+            gte: new Date(),
+          },
+        },
+        include: {
+          service: {
+            include: {
+              barbershop: true,
+            },
+          },
+        },
+        orderBy: {
+          date: "asc",
+        },
+      })
+    : []
 
   return (
     <div>
@@ -63,18 +84,23 @@ const Home = async () => {
             alt="Agende nos melhores"
           />
         </div>
+        <h2 className="mt-6 mb-3 font-bold text-gray-03 uppercase">
+          Agendamentos
+        </h2>
+
+        <h2 className="mt-6 mb-3 font-bold text-gray-03 uppercase">
+          Confirmados
+        </h2>
 
         {/* Agendamento */}
-        <BookingItem />
-
+        <div className="flex gap-3 [&::-webkit-scrollbar]:hidden">
+          {confirmedbookings.map((booking) => (
+            <BookingItem key={booking.id} booking={booking} />
+          ))}
+        </div>
         <h2 className="mt-6 mb-3 font-bold text-gray-03 uppercase">
           Recomendados
         </h2>
-        <div className="borer-b flex gap-3 overflow-auto border-solid [&::-webkit-scrollbar]:hidden">
-          {barbershops.map((barbershop) => (
-            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-          ))}
-        </div>
 
         <h2 className="mt-6 mb-3 font-bold text-gray-03 uppercase">
           Populares

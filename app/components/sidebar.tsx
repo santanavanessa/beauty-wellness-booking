@@ -38,7 +38,7 @@ const Sidebar = () => {
             </Avatar>
 
             <div>
-              <p className="font-bold">{data.user.name}</p>
+              <p className="font-bold text-gray-400">{data.user.name}</p>
               <p className="text-xs">{data.user.email}</p>
             </div>
           </div>
@@ -76,9 +76,12 @@ const Sidebar = () => {
         <Button
           className="justify-start gap-2 hover:bg-secondary-black"
           variant="ghost"
+          asChild
         >
-          <CalendarIcon size={18} />
-          Agendamentos
+          <Link href="/bookings">
+            <CalendarIcon size={18} />
+            Agendamentos
+          </Link>
         </Button>
       </div>
 

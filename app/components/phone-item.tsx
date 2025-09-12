@@ -8,7 +8,7 @@ interface PhoneItemProps {
   phone: string
   index: number
 }
-const Phoneitem = ({ phone, index }: PhoneItemProps) => {
+const PhoneItem = ({ phone, index }: PhoneItemProps) => {
   const handleCopyPhoneClick = (phone: string) => {
     navigator.clipboard.writeText(phone)
     toast.success("Telefone copiado com sucesso!")
@@ -36,4 +36,4 @@ const Phoneitem = ({ phone, index }: PhoneItemProps) => {
   )
 }
 
-export default Phoneitem
+export default PhoneItem
