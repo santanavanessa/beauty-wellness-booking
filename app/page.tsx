@@ -12,12 +12,11 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "./lib/auth"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
+import { getConfirmedBookings } from "./data/get-confirmed-bookings"
 
 const Home = async () => {
   const session = await getServerSession(authOptions)
-
   const barbershops = await db.barbershop.findMany({})
-
   const popularBarbershops = await db.barbershop.findMany({
     orderBy: {
       name: "desc",
@@ -58,7 +57,7 @@ const Home = async () => {
           <span className="capitalize">
             {format(new Date(), "EEEE, dd", { locale: ptBR })}
           </span>
-          <span>&nbsp; de &nbsp;</span>
+          <span>&nbsp;de&nbsp;</span>
           <span>{format(new Date(), "MMMM", { locale: ptBR })}</span>
         </p>
 
@@ -95,23 +94,32 @@ const Home = async () => {
             alt="Agende nos melhores"
           />
         </div>
-        <h2 className="mt-6 mb-3 font-bold text-gray-03 uppercase">
-          Agendamentos
-        </h2>
+        {confirmedbookings.length > 0 && (
+          <>
+            <h2 className="mt-6 mb-3 text-xs font-bold text-gray-03 uppercase">
+              Agendamentos
+            </h2>
 
-        <h2 className="mt-6 mb-3 font-bold text-gray-03 uppercase">
-          Confirmados
-        </h2>
+            {/* AGENDAMENTO */}
+            <div>
+              {confirmedbookings.map((booking) => (
+                <BookingItem
+                  key={booking.id}
+                  booking={JSON.parse(JSON.stringify(booking))}
+                />
+              ))}
+            </div>
+          </>
+        )}
 
-        {/* Agendamento */}
-        <div className="flex gap-3 [&::-webkit-scrollbar]:hidden">
-          {confirmedbookings.map((booking) => (
-            <BookingItem key={booking.id} booking={booking} />
-          ))}
-        </div>
         <h2 className="mt-6 mb-3 font-bold text-gray-03 uppercase">
           Recomendados
         </h2>
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {barbershops.map((barbershop) => (
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
 
         <h2 className="mt-6 mb-3 font-bold text-gray-03 uppercase">
           Populares
