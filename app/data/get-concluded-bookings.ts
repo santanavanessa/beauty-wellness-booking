@@ -7,7 +7,6 @@ import { db } from "../lib/prisma"
 export const getConcludedBookings = async () => {
   const session = await getServerSession(authOptions)
   if (!session?.user) return []
-
   return db.booking.findMany({
     where: {
       userId: (session.user as any).id,
