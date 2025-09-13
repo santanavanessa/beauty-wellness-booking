@@ -23,31 +23,13 @@ const Home = async () => {
     },
   })
 
-  const confirmedbookings = session?.user
-    ? await db.booking.findMany({
-        where: {
-          userId: (session.user as any).id,
-          date: {
-            gte: new Date(),
-          },
-        },
-        include: {
-          service: {
-            include: {
-              barbershop: true,
-            },
-          },
-        },
-        orderBy: {
-          date: "asc",
-        },
-      })
-    : []
+  const confirmedbookings = await getConfirmedBookings()
 
   return (
     <div>
       {/* Header */}
       <Header />
+
       <div className="p-5">
         <h2 className="text-xl font-bold">
           Olá, {session?.user ? session.user.name + "!" : " boas-vindas!"}
@@ -71,7 +53,7 @@ const Home = async () => {
 
         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((option) => (
-            <Button className="bg-secondary-black" key={option.title} asChild>
+            <Button className="bg-gray-01" key={option.title} asChild>
               <Link href={`/barbershops?service=${option.title}`}>
                 <Image
                   alt={option.title}
@@ -94,14 +76,15 @@ const Home = async () => {
             alt="Agende nos melhores"
           />
         </div>
+
         {confirmedbookings.length > 0 && (
           <>
-            <h2 className="mt-6 mb-3 text-xs font-bold text-gray-03 uppercase">
+            <h2 className="mt-6 mb-3 text-xs font-bold text-gray-400 uppercase">
               Agendamentos
             </h2>
 
             {/* AGENDAMENTO */}
-            <div>
+            <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
               {confirmedbookings.map((booking) => (
                 <BookingItem
                   key={booking.id}
