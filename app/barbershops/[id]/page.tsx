@@ -1,3 +1,4 @@
+import Header from "@/app/components/header"
 import Phoneitem from "@/app/components/phone-item"
 import ServiceItem from "@/app/components/service-item"
 import Sidebar from "@/app/components/sidebar"
@@ -33,14 +34,18 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
 
   return (
     <div>
+      <div className="hidden md:block">
+        <Header />
+      </div>
+
       {/* Imagem */}
 
-      <div className="relative h-[250px] w-full">
+      <div className="relative h-[250px] w-full md:m-auto md:w-[1146px] md:max-w-[96%] md:py-10 lg:flex lg:items-start lg:gap-10">
         <Image
           alt={barbershop.name}
           src={barbershop?.imageUrl}
           fill
-          className="object-cover"
+          className="object-cover md:rounded-lg"
         />
 
         <Button

@@ -165,7 +165,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
   return (
     <>
       <Card>
-        <CardContent className="flex items-center gap-3 p-3">
+        <CardContent className="flex items-center gap-3 p-2">
           {/* IMAGE */}
           <div className="relative max-h-[110px] min-h-[110px] max-w-[110px] min-w-[110px]">
             <Image
@@ -176,7 +176,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
             />
           </div>
           {/* DIREITA */}
-          <div className="space-y-2">
+          <div className="w-full space-y-2 xl:space-y-3">
             <h3 className="text-sm font-semibold">{service.name}</h3>
             <p className="text-sm text-gray-400">{service.description}</p>
             {/* PREÇO E BOTÃO */}
