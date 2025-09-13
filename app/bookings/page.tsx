@@ -15,21 +15,40 @@ const Bookings = async () => {
   }
 
   const confirmedBookings = await getConfirmedBookings()
-
   const concludedBookings = await getConcludedBookings()
+
   return (
     <>
       <Header />
       <div className="space-y-5 p-5">
         <h1 className="text-xl font-bold">Agendamentos</h1>
         {confirmedBookings.length === 0 && concludedBookings.length === 0 && (
-          <p className="text-gray-02">Você não tem agendamentos.</p>
+          <p className="text-gray-03">Você não tem agendamentos.</p>
         )}
         {confirmedBookings.length > 0 && (
           <>
             <h2 className="mt-6 mb-3 text-xs font-bold text-gray-02 uppercase">
               Confirmados
             </h2>
+            {confirmedBookings.map((booking) => (
+              <BookingItem
+                key={booking.id}
+                booking={JSON.parse(JSON.stringify(booking))}
+              />
+            ))}
+          </>
+        )}
+        {concludedBookings.length > 0 && (
+          <>
+            <h2 className="mt-6 mb-3 text-xs font-bold text-gray-03 uppercase">
+              Finalizados
+            </h2>
+            {concludedBookings.map((booking) => (
+              <BookingItem
+                key={booking.id}
+                booking={JSON.parse(JSON.stringify(booking))}
+              />
+            ))}
           </>
         )}
       </div>
