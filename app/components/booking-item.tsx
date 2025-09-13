@@ -53,7 +53,6 @@ const BookingItem = ({ booking }: BookingItemProps) => {
     service: { barbershop },
   } = booking
   const isConfirmed = isFuture(booking.date)
-
   const handleCancelBooking = async () => {
     try {
       await deleteBooking(booking.id)
@@ -64,7 +63,6 @@ const BookingItem = ({ booking }: BookingItemProps) => {
       toast.error("Erro ao cancelar reserva. Tente novamente.")
     }
   }
-
   const handleSheetOpenChange = (isOpen: boolean) => {
     setIsSheetOpen(isOpen)
   }
@@ -75,7 +73,6 @@ const BookingItem = ({ booking }: BookingItemProps) => {
         <Card className="min-w-[90%]">
           <CardContent className="flex justify-between p-0">
             {/* Esquerda */}
-
             <div className="flex flex-col gap-2 py-5 pl-5">
               <Badge
                 className="w-fit bg-dark-purple text-primary-purple"
@@ -84,7 +81,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                 {isConfirmed ? "Confirmado" : "Finalizado"}
               </Badge>
 
-              <h3 className="font-bold">{booking.service.name}</h3>
+              <h3 className="font-semibold">{booking.service.name}</h3>
 
               <div className="flex items-center gap-2">
                 <Avatar className="h-6 w-6">
@@ -110,7 +107,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
           </CardContent>
         </Card>
       </SheetTrigger>
-      <SheetContent className="w-[85%]">
+      <SheetContent className="w-[85%] bg-secondary-black">
         <SheetHeader>
           <SheetTitle className="text-left">Informações da Reserva</SheetTitle>
         </SheetHeader>
@@ -124,7 +121,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
           />
 
           <Card className="z-50 mx-5 mb-3 w-full rounded-xl bg-secondary-black">
-            <CardContent className="flex items-center px-5 py-3">
+            <CardContent className="flex items-center gap-3 px-5 py-3">
               <Avatar>
                 <AvatarImage src={barbershop.imageUrl} />
               </Avatar>
@@ -151,7 +148,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
             />
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 p-3">
             {barbershop.phones.map((phone, index) => (
               <PhoneItem key={index} phone={phone} index={index} />
             ))}
