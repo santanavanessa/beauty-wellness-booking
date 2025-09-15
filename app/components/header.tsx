@@ -11,7 +11,7 @@ import { Navbar } from "./navbar"
 const Header = () => {
   return (
     <Card className="w-full rounded-none">
-      <CardContent className="flex flex-row items-center justify-between gap-10 pr-4">
+      <CardContent className="flex flex-row items-center justify-between gap-10 p-5 lg:px-14">
         <Link href="/">
           <Image alt="Trimmr" src="/logo.svg" height={18} width={120} />
         </Link>

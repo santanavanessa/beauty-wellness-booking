@@ -41,10 +41,10 @@ const BarbershopsPage = async ({ searchParams }: BarbershopsPageProps) => {
   return (
     <div>
       <Header />
-      <div className="mx-auto my-6 max-w-[1200px] px-5">
+      <div className="w-full gap-3 p-5 lg:px-14">
         <Search />
       </div>
-      <div className="mx-auto mb-5 max-w-[1200px] px-4">
+      <div className="mb-5 px-5 lg:px-14">
         <h2 className="mt-6 mb-3 text-xs font-bold text-gray-03 uppercase lg:text-sm">
           Resultados para &quot;{searchParams?.title || searchParams?.service}
           &quot;
