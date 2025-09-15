@@ -13,6 +13,13 @@ import { authOptions } from "./lib/auth"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { getConfirmedBookings } from "./data/get-confirmed-bookings"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 const Home = async () => {
   const session = await getServerSession(authOptions)
@@ -88,7 +95,7 @@ const Home = async () => {
             </h2>
 
             {/* AGENDAMENTO */}
-            <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+            <div className="grid grid-cols-1 gap-4 overflow-auto md:grid-cols-2 [&::-webkit-scrollbar]:hidden">
               {confirmedbookings.map((booking) => (
                 <BookingItem
                   key={booking.id}
@@ -104,11 +111,21 @@ const Home = async () => {
         <h2 className="mt-6 mb-3 font-bold text-gray-03 uppercase lg:mt-0 lg:text-sm">
           Recomendados
         </h2>
-        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
-          {barbershops.map((barbershop) => (
-            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-          ))}
-        </div>
+
+        <Carousel opts={{ align: "start" }}>
+          <CarouselContent className="">
+            {barbershops.map((barbershop) => (
+              <CarouselItem
+                key={barbershop.id}
+                className="basis-1/1 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+              >
+                <BarbershopItem barbershop={barbershop} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="text-md hidden h-12 w-12 bg-secondary-black disabled:opacity-0 lg:left-[-1.4rem] lg:flex" />
+          <CarouselNext className="text-md hidden h-12 w-12 bg-secondary-black disabled:opacity-0 lg:right-[-1.4rem] lg:flex" />
+        </Carousel>
       </div>
 
       <div className="p-5 lg:px-14">
@@ -116,11 +133,20 @@ const Home = async () => {
           Populares
         </h2>
 
-        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
-          {popularBarbershops.map((barbershop) => (
-            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
-          ))}
-        </div>
+        <Carousel opts={{ align: "start" }}>
+          <CarouselContent>
+            {popularBarbershops.map((barbershop) => (
+              <CarouselItem
+                key={barbershop.id}
+                className="basis-1/1 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+              >
+                <BarbershopItem barbershop={barbershop} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="text-md hidden h-12 w-12 bg-secondary-black disabled:opacity-0 lg:left-[-1.4rem] lg:flex" />
+          <CarouselNext className="text-md hidden h-12 w-12 bg-secondary-black disabled:opacity-0 lg:right-[-1.4rem] lg:flex" />
+        </Carousel>
       </div>
     </div>
   )
