@@ -21,12 +21,12 @@ const Sidebar = () => {
   const handleLogoutClick = () => signOut()
 
   return (
-    <SheetContent className="overflow-y-auto bg-secondary-black">
+    <SheetContent className="min-w-[250px] overflow-y-auto bg-secondary-black md:min-w-[300px] lg:min-w-[520px]">
       <SheetHeader>
         <SheetTitle className="text-left">Menu</SheetTitle>
       </SheetHeader>
 
-      <div className="flex items-center gap-3 border-b border-solid px-5 py-5">
+      <div className="flex items-center justify-between gap-3 border-b border-solid px-5 py-5">
         {data?.user ? (
           <div className="flex items-center gap-2">
             <Avatar>

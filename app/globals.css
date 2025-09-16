@@ -2,32 +2,31 @@
 
 @theme {
   --color-background-black: #141518;
-  --color-secondary-black: #1A1B1F;
-  --color-primary-purple: #8162FF; 
-  --color-dark-purple: #221C3D;
-  --color-gray-01: #26272B;
-  --color-gray-02: #4E525B;
+  --color-secondary-black: #1a1b1f;
+  --color-primary-purple: #8162ff;
+  --color-dark-purple: #221c3d;
+  --color-gray-01: #26272b;
+  --color-gray-02: #4e525b;
   --color-gray-03: #838896;
-  --color-white: #FFFFFF;
-  --color-red: #EF4444;
-  --color-dark-red: #2F1F1F;
+  --color-white: #ffffff;
+  --color-red: #ef4444;
+  --color-dark-red: #2f1f1f;
 }
 
 @layer base {
   * {
-    
     @apply border-gray-01 antialiased;
-}
+  }
 
-html {
-  @apply h-full;
-}
+  html {
+    @apply h-full;
+  }
 
-body {
-  @apply bg-background-black text-white h-full;
-}
+  body {
+    @apply h-full bg-background-black text-white;
+  }
 
-button {
-  @apply cursor-pointer;
-}
+  button {
+    @apply cursor-pointer;
+  }
 }

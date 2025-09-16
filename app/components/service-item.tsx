@@ -24,6 +24,13 @@ import { Barbershop, BarbershopService, Booking } from "../generated/prisma"
 import { isPast, isToday, set } from "date-fns"
 import { Calendar } from "@/components/ui/calendar"
 import BookingSummary from "./booking-summary"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 interface ServiceItemProps {
   service: BarbershopService
@@ -177,11 +184,15 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
           </div>
           {/* DIREITA */}
           <div className="w-full space-y-2 xl:space-y-3">
-            <h3 className="text-sm font-semibold">{service.name}</h3>
-            <p className="text-sm text-gray-400">{service.description}</p>
+            <h3 className="text-sm font-semibold xl:text-base">
+              {service.name}
+            </h3>
+            <p className="text-sm text-gray-400 xl:text-base">
+              {service.description}
+            </p>
             {/* PREÇO E BOTÃO */}
             <div className="flex items-center justify-between">
-              <p className="text-sm font-bold text-primary-purple">
+              <p className="text-sm font-bold text-primary-purple xl:text-base">
                 {Intl.NumberFormat("pt-BR", {
                   style: "currency",
                   currency: "BRL",
@@ -250,25 +261,36 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                   </div>
 
                   {selectedDay && (
-                    <div className="flex gap-2 overflow-x-auto border-b border-solid p-5 [&::-webkit-scrollbar]:hidden">
-                      {timeList.length > 0 ? (
-                        timeList.map((time) => (
-                          <Button
-                            key={time}
-                            variant={
-                              selectedTime === time ? "default" : "outline"
-                            }
-                            onClick={() => handleTimeSelect(time)}
-                          >
-                            {time}
-                          </Button>
-                        ))
-                      ) : (
-                        <p className="text-xs">
-                          Não há horários disponíveis para este dia.
-                        </p>
-                      )}
-                    </div>
+                    <Carousel className="p-5">
+                      <CarouselContent className="gap-1">
+                        {timeList.length > 0 ? (
+                          timeList.map((time) => (
+                            <CarouselItem
+                              key={time}
+                              className="basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/5"
+                            >
+                              <Button
+                                variant={
+                                  selectedTime === time ? "default" : "outline"
+                                }
+                                className="rounded-full hover:bg-dark-purple active:bg-primary-purple"
+                                onClick={() => handleTimeSelect(time)}
+                              >
+                                {time}
+                              </Button>
+                            </CarouselItem>
+                          ))
+                        ) : (
+                          <CarouselItem>
+                            <p className="text-xs">
+                              Não há horários disponíveis para este dia.
+                            </p>
+                          </CarouselItem>
+                        )}
+                      </CarouselContent>
+                      <CarouselPrevious className="bg-background-black" />
+                      <CarouselNext className="bg-background-black" />
+                    </Carousel>
                   )}
 
                   {selectedDate && (

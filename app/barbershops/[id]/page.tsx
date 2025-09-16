@@ -1,7 +1,6 @@
 import { BarbershopInfo } from "@/app/components/barbershop-info"
 import Header from "@/app/components/header"
 import PhoneItem from "@/app/components/phone-item"
-import Phoneitem from "@/app/components/phone-item"
 import ServiceItem from "@/app/components/service-item"
 import Sidebar from "@/app/components/sidebar"
 
@@ -15,16 +14,15 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 
 interface BarbershopPageProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
 const BarbershopPage = async ({ params }: BarbershopPageProps) => {
+  const { id } = await params
   //Chamar o banco de dados
   const barbershop = await db.barbershop.findUnique({
     where: {
-      id: params.id,
+      id,
     },
     include: {
       services: true,
@@ -70,7 +68,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
                 <Button
                   size={"icon"}
                   variant={"outline"}
-                  className="absolute top-4 right-4"
+                  className="absolute top-4 right-4 bg-background-black hover:bg-secondary-black"
                 >
                   <MenuIcon />
                 </Button>
@@ -91,7 +89,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 border-0 lg:flex-col lg:rounded-lg lg:bg-background-black lg:px-5 lg:py-3">
+            <div className="lg:bg-secondary flex items-center gap-2 border-0 lg:flex-col lg:rounded-lg lg:px-5 lg:py-3">
               <div className="flex items-center gap-2">
                 <StarIcon
                   className="fill-primary-purple text-primary-purple"

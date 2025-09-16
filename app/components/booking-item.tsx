@@ -161,14 +161,17 @@ const BookingItem = ({ booking }: BookingItemProps) => {
         <SheetFooter className="mt-6">
           <div className="mx-2 flex flex-row space-x-2">
             <SheetClose asChild>
-              <Button variant="outline" className="w-[50%]">
+              <Button
+                variant="outline"
+                className="flex-1 hover:bg-background-black"
+              >
                 Voltar
               </Button>
             </SheetClose>
             {isConfirmed && (
               <Dialog>
                 <DialogTrigger className="w-full" asChild>
-                  <Button className="w-[50%] border bg-[#EF4444]">
+                  <Button className="flex-1 border bg-red hover:bg-dark-red">
                     Cancelar Reserva
                   </Button>
                 </DialogTrigger>
@@ -181,16 +184,19 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                     </DialogDescription>
                   </DialogHeader>
                   <DialogFooter>
-                    <div className="flex flex-row gap-4">
-                      <DialogClose asChild>
-                        <Button variant="outline" className="w-[50%]">
+                    <div className="flex flex-1 flex-row justify-center gap-4">
+                      <DialogClose asChild className="flex-1">
+                        <Button
+                          variant="outline"
+                          className="hover:bg-secondary-black"
+                        >
                           Voltar
                         </Button>
                       </DialogClose>
                       <DialogClose asChild>
                         <Button
                           onClick={handleCancelBooking}
-                          className="w-[50%] border bg-[#EF4444]"
+                          className="flex-1 border bg-red hover:bg-dark-red"
                         >
                           Confirmar
                         </Button>
