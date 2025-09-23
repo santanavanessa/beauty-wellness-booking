@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth"
 import Header from "../components/header"
 import { authOptions } from "../lib/auth"
-import { db } from "../lib/prisma"
 import { notFound } from "next/navigation"
 import BookingItem from "../components/booking-item"
 import { getConfirmedBookings } from "../data/get-confirmed-bookings"
