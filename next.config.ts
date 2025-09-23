@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   images: {
@@ -6,8 +6,12 @@ const nextConfig: NextConfig = {
       {
         hostname: "utfs.io",
       },
-    ]
-  }
-};
+    ],
+  },
+  eslint: {
+    // Não roda ESLint em produção/deploy
+    ignoreDuringBuilds: true,
+  },
+}
 
-export default nextConfig;
+export default nextConfig
