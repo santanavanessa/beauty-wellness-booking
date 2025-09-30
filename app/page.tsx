@@ -83,6 +83,7 @@ const Home = async () => {
           <Image
             src="/banner-01.svg"
             fill
+            loading="lazy"
             className="rounded-xl object-cover"
             alt="Agende nos melhores com Trimmr"
           />
