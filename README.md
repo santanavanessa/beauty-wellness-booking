@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✂️ Trimmr - Sistema de Agendamento para Barbearias
 
-## Getting Started
+![Project Status](https://img.shields.io/badge/status-concluído-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-First, run the development server:
+## 📖 Sobre o Projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O **Trimmr** é uma plataforma Full Stack de agendamento de serviços para barbearias e salões de beleza. O projeto foi desenvolvido com uma abordagem **Mobile-First**, garantindo uma experiência fluida em dispositivos móveis, mas totalmente responsiva para telas maiores (tablets e desktops).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O objetivo principal é facilitar a conexão entre clientes e estabelecimentos, permitindo agendamentos rápidos, visualização de serviços e gerenciamento de reservas pessoais.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Tecnologias Utilizadas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+O projeto foi construído utilizando as tecnologias mais modernas do ecossistema React e Node.js:
 
-## Learn More
+- **Framework Principal:** [Next.js](https://nextjs.org/) 
+- **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
+- **Estilização:** [Tailwind CSS](https://tailwindcss.com/)
+- **Componentes UI:** [Shadcn UI](https://ui.shadcn.com/) (Cards, Sheets, Avatars, Buttons, etc.)
+- **Banco de Dados:** [PostgreSQL](https://www.postgresql.org/) 
+- **ORM:** [Prisma](https://www.prisma.io/)
+- **Autenticação:** [NextAuth.js](https://next-auth.js.org/) 
+- **Validação de Forms:** Zod
+- **Datas:** date-fns
+- **Qualidade de Código:** ESLint, Prettier, Husky, Lint-staged e Commitlint (Conventional Commits)
 
-To learn more about Next.js, take a look at the following resources:
+## ✨ Funcionalidades
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Autenticação Segura:** Login social com Google via NextAuth.
+- **Busca Inteligente:** Pesquisa de barbearias por nome (Case Insensitive).
+- **Catálogo de Serviços:** Páginas individuais para cada barbearia listando serviços, preços e descrições.
+- **Agendamento Real:**
+  - Seleção de dia e horário dinâmico.
+  - Validação para impedir agendamentos em datas passadas.
+  - Bloqueio de horários já reservados.
+- **Gestão de Reservas:**
+  - Dashboard para o usuário visualizar agendamentos confirmados e finalizados.
+  - Opção de cancelamento de reserva.
+- **Feedback Visual:** Uso de Toasts (Sonner) para confirmar ações (sucesso/erro).
+- **Design Responsivo:** Layout adaptado para mobile, tablets e desktops (incluindo carrossel e menu lateral).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🗄️ Modelagem de Dados (Database)
 
-## Deploy on Vercel
+O banco de dados relacional foi estruturado para suportar a integridade dos agendamentos:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **User:** Gerenciado via NextAuth/Google.
+- **Barbershop:** Contém dados do estabelecimento (Nome, Endereço, Imagem, Telefones).
+- **BarbershopService:** Serviços vinculados a uma barbearia (Corte, Barba, Preço).
+- **Booking:** Tabela pivô que conecta Usuário, Serviço e Data/Hora.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔧 Como Executar o Projeto
+
+### Pré-requisitos
+- Node.js instalado.
+- Conta no [Neon DB](https://neon.tech/) ou Docker para rodar o PostgreSQL.
+- Credenciais do Google Cloud Console (OAuth Client ID e Secret).
+
+### Passo a passo
+
+1. **Clone o repositório:**
+   ```bash
+   git clone [https://github.com/seu-usuario/trimmr.git](https://github.com/seu-usuario/trimmr.git)
+   cd trimmr
