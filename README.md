@@ -61,3 +61,42 @@ O banco de dados relacional foi estruturado para suportar a integridade dos agen
    ```bash
    git clone [https://github.com/seu-usuario/trimmr.git](https://github.com/seu-usuario/trimmr.git)
    cd trimmr
+   ```
+2. Instale as dependências:
+
+Bash
+
+```npm install```
+
+3. Configure as Variáveis de Ambiente: Crie um arquivo .env na raiz do projeto com as seguintes chaves:
+
+ ```
+
+
+DATABASE_URL="sua_connection_string_do_neon_ou_docker"
+GOOGLE_CLIENT_ID="seu_google_client_id"
+GOOGLE_CLIENT_SECRET="seu_google_client_secret"
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="sua_chave_secreta_para_jwt"
+Configure o Banco de Dados (Prisma):
+```
+4. Configure o Banco de Dados (Prisma):
+ ```
+# Gera o cliente do Prisma
+npx prisma generate  
+
+# Roda as migrations
+npx prisma migrate dev --name init_db 
+
+# Popula o banco com dados fictícios (Seed)
+npx prisma db seed
+
+ ```
+5. Execute o projeto:
+
+  ```npm run dev```
+
+  Acesse http://localhost:3000.
+
+## 📝 Licença
+Este projeto está sob a licença MIT.
